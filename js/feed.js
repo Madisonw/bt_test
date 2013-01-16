@@ -26,12 +26,6 @@
 	 */
 	var Feed = BB.Model.extend({
 		initialize : function() {
-			
-			/*
-			 * turning all the feed entries into the backbone model and putting them into a collection, 
-			 * then setting that collection as an attibute on this model
-			 */
-			
 			this.set("entries", new FeedEntryList());
 		}
 	})
@@ -71,7 +65,7 @@
 			_.each(this.model.attributes.entry,function(entry){
 				modelEntries.add(new FeedEntry(entry));
 			})
-			//just making this asynch
+			//just making thumbnail loading asynch so we're not blocking real rendering
 			setTimeout(function(){_.invoke(entry_views,"get_thumbnail");},1);
 			return this;
 		},
