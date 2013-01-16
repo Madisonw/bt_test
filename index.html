@@ -21,6 +21,7 @@
 		</script>
 		<!-- The below template isn't super robust, but it could be if I knew what to predict out of this feed in a more general sense. -->
 		<script type="underscore/template" id="EntryTemplate">
+				<div class="thumb_container"><img src="img/no_thumbnail.png" /></div>
 				<h3><%= title %></h3>
 				<ul class="meta_container" style="height: 0px;">
 					<li>Links: <% _.each(link,function(link_obj){ %> <a href="<%= link_obj.href %>" target="_blank"> <img src="img/<%= link_obj.rel %>.png"  height="20px" width="20px" alt="<%= link_obj.rel %> link" /></a> <% }) %></li>

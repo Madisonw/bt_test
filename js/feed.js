@@ -53,11 +53,14 @@
 	/**
 	 * FeedView is the encapsulating box that holds all of the feed entries.
 	 */
+	var entry_views = [];
+	
 	var FeedView = BB.View.extend({
 		tagName : "section",
 		template : _.template($("#FeedTemplate").html()),
 		addEntry : function(entry) {
 			var view = new EntryView({model: entry});
+			entry_views.push(view);
 			var ele = this.$el.find("div.entry_container");
 			this.entry_container.append(view.render().el);
 		},
@@ -68,6 +71,8 @@
 			_.each(this.model.attributes.entry,function(entry){
 				modelEntries.add(new FeedEntry(entry));
 			})
+			//just making this asynch
+			setTimeout(function(){_.invoke(entry_views,"get_thumbnail");},1);
 			return this;
 		},
 		initialize : function() {
@@ -101,6 +106,16 @@
 				this.meta_open = true;
 			}
 			this.meta_container.animate(animate_obj);
+		},
+		get_thumbnail : function() {
+			var that = this;
+			var img = $("<img />",{
+				src : this.model.get("media:thumbnail").url
+			}).error(function(){
+				$(this).attr("src","img/no_thumbnail.png");
+			}).load(function(){
+				that.$el.find(".thumb_container").html(img);
+			})
 		},
 		render : function() {
 			this.$el.html(this.template(this.model.toJSON()));
