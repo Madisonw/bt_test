@@ -81,7 +81,7 @@
 				animate_obj.overflow = "hidden";
 				this.meta_open = false;
 			} else {
-				animate_obj.height = "200px";
+				animate_obj.height = "230px";
 				this.meta_container.css("overflow","auto");
 				this.meta_open = true;
 			}
