@@ -3,22 +3,28 @@
 	/*
 	 * Doing this with Backbone is a little contrived and perhaps over-the-top, 
 	 * but I like creating new projects with it.
-	 */
-	
-	/*  
+     *
 	 * First we're going to set up our models and collections. :D
 	 * We're going to declare them in ascending nested order for cascading's sake
 	 * and so we're looking at our primals first.
 	 * 
 	 */
+	/**
+	 * The most basic primal in our application. It has the meat an potatoes of what we're trying to connect our users with.
+	 */
 	var FeedEntry = BB.Model.extend({})
 	
+	/**
+	 * FeedEntryList is just a collection for FeedEntrys
+	 */
 	var FeedEntryList = BB.Collection.extend({
 		model : FeedEntry
 	})
 	
+	/**
+	 * Just a very basic model to house the data that the FeedView is going to use to construct it's markup.
+	 */
 	var Feed = BB.Model.extend({
-		
 		initialize : function() {
 			
 			/*
@@ -30,9 +36,13 @@
 		}
 	})
 	
+	/**
+	 * Just a collection for the feed models. Right now we're just seeing 1, but there could be more later!
+	 */
 	var FeedList = BB.Collection.extend({
 		model : Feed
 	})
+	
 	
 	var list_of_feeds = new FeedList;
 	
@@ -40,6 +50,9 @@
 	 * Now we're going to declare our Views. Chyea!
 	 */
 	
+	/**
+	 * FeedView is the encapsulating box that holds all of the feed entries.
+	 */
 	var FeedView = BB.View.extend({
 		tagName : "section",
 		template : _.template($("#FeedTemplate").html()),
@@ -63,7 +76,9 @@
 		}
 	})
 	
-	
+	/**
+	 * EntryView is one of the many rows you see in the UI.
+	 */
 	var EntryView = BB.View.extend({
 		tagName : "li",
 		template : _.template($("#EntryTemplate").html()),
@@ -99,7 +114,9 @@
 		}
 	})
 	
-	
+	/**
+	 * FeedBrowser is the all-encapsulating application view. It starts the show basically.
+	 */
 	var FeedBrowser = BB.View.extend({
 		el : $("#feeds"),
 		currentTime : (new Date().getTime()),
@@ -138,7 +155,9 @@
 			}
 		}
 	})
-	
+	/**
+	 * Okay this actually starts the show.
+	 */
 	var App = new FeedBrowser;
 	
 	
